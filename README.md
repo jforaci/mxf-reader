@@ -42,4 +42,4 @@ MXF is allowed a preamble called a "run-in". Some non-compliant files may take m
 The `MetadataReadMode` can be set to `All`, which will read everything including the metadata header, essence container and all system and essence elements. `MxfReader` will always attempt to use the RIP to hop through the file, if it's available. If you're just after the metadata, `FooterOnly` will read only the footer metadata set which should be final. Otherwise, `HeaderOnly` will only read the header partition;  (`FromFooterAll` is not used at this time).
 
 ## To-do
-- Currently, the API is file-oriented. I'd like to change this to better support streams, e.g. `InputStream`, etc. This should be realatively cosmetic except for some places where I explicitly rely on an EOF.
+- Currently, the API is file-oriented. I'd like to change this to better support streams, e.g. `InputStream`, etc. This should be relatively cosmetic except for some places where I explicitly rely on an EOF.
