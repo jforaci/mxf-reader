@@ -10,7 +10,6 @@ mxfReader.setDebugPrint(true);
 mxfReader.setMetadataReadMode(MxfReader.MetadataReadMode.All);
 mxfReader.setParseEssenceElements(true); // force parse GC essence (media) elements
 mxfReader.setParseSystemElements(true); // force parse of GC system elements
-long startTime = System.currentTimeMillis();
 mxfReader.readAll(); // start parsing
 ```
 
