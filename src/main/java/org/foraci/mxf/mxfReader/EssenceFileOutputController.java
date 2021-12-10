@@ -36,9 +36,11 @@ public class EssenceFileOutputController implements EssenceContainerOutputContro
         if (fos == null) {
             String suffix = "-" + key;
             if (ul.isPictureEssence()) {
-                suffix += "." + "mpg";
+                suffix += "-" + "picture";
             } else if (ul.isSoundEssence()) {
-                suffix += "." + "raw";
+                suffix += "-" + "sound";
+            } else if (ul.isDataEssence()) {
+                suffix += "-" + "data";
             }
             fos = new FileOutputStream(new File(baseName.getParentFile(), baseNameFilename() + suffix), false);
             fout.put(key, fos);
