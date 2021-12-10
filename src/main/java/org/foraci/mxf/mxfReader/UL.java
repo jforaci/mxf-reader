@@ -141,7 +141,7 @@ public class UL {
         if (!isGcKey()) {
             return false;
         }
-        if (key[4] == 0x01 && key[5] == 0x02) {
+        if (isEssenceKey()) {
             if (key[12] == 0x05 || key[12] == 0x15) {
                 name = "Picture Elem";
                 type = PICTURE_ELEMENT;
@@ -160,6 +160,22 @@ public class UL {
         return false;
     }
 
+    /**
+     * Matches whether the registry portion of the UL Designation is for an essence dictionary
+     * @return <code>true</code> if this UL is from an essence dictionary
+     */
+    public boolean isEssenceKey() {
+        return (key[4] == 0x01 && key[5] == 0x02);
+    }
+
+    /**
+     * Whether this is a privately-registered UL item
+     * @return <code>true</code> if this UL metadata class (byte 9) is private
+     */
+    public boolean isClassPrivate() {
+        return (key[8] == 0x0E);
+    }
+
     public boolean isGcSystemElement() {
         return gcSystemItem;
     }
@@ -173,9 +189,6 @@ public class UL {
     }
 
     public long getTrackNumber() {
-        if (!isGcEssenceElement()) {
-            return -1;
-        }
         return ((key[12] & 0xFF) << 24) | ((key[13] & 0xFF) << 16) | ((key[14] & 0xFF) << 8) | (key[15] & 0xFF);
     }
 

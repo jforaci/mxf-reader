@@ -143,7 +143,8 @@ public class MxfReader {
                         warnNonEmptyIndex = true;
                     }
                     parseKey(key);
-                } else if (ul.isGcEssenceElement() || ul.isGcSystemElement()) {
+                } else if (ul.isGcEssenceElement() || ul.isGcSystemElement()
+                        || (ul.isEssenceKey() && ul.isClassPrivate())) {
                     if (!assertExpected(ExpectedData.PartitionData)) {
                         warnContext("header data set ran short");
                     }
@@ -154,7 +155,7 @@ public class MxfReader {
                     if (checkSkipToNextPartition()) {
                         continue;
                     }
-                    if (ul.isGcEssenceElement()) {
+                    if (ul.isEssenceKey()) {
                         if (!partitionPacks.hasCurrent()) {
                             throw new IllegalStateException("no partition pack found before essence");
                         }
