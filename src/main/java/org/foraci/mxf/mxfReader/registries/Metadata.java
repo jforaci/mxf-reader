@@ -10,62 +10,62 @@ import org.foraci.mxf.mxfReader.NumericUL;
 public class Metadata extends MetadataGen {
     static void init() {
         MetadataGen.init();
-        GUID.setParserClass(UIDParser.class);
+        InstanceID.setParserClass(UIDParser.class);
         GenerationID.setParserClass(UIDParser.class);
         LinkedGenerationID.setParserClass(UIDParser.class);
         // preface
-        ContainerLastModificationDateTime.setParserClass(TimestampParser.class);
+        FileLastModified.setParserClass(TimestampParser.class);
         PrimaryPackage.setParserClass(UIDParser.class);
         IdentificationList.setParserClass(UIDBatchParser.class);
         Packages.setParserClass(UIDBatchParser.class);
         EssenceContainers.setParserClass(ULBatchParser.class);
-        Content.setParserClass(UIDParser.class);
-        OperationalPatternUL.setParserClass(ULParser.class);
-        DescriptiveMetadataSchemes.setParserClass(ULBatchParser.class);
+        ContentStorageObject.setParserClass(UIDParser.class);
+        OperationalPattern.setParserClass(ULParser.class);
+        DescriptiveSchemes.setParserClass(ULBatchParser.class);
         // identification
-        ModificationDateTime.setParserClass(TimestampParser.class);
-        ApplicationSupplierName1.setParserClass(UTF16StringParser.class);
-        ApplicationName1.setParserClass(UTF16StringParser.class);
-        ApplicationVersionString1.setParserClass(UTF16StringParser.class);
+        FileModificationDate.setParserClass(TimestampParser.class);
+        ApplicationSupplierName.setParserClass(UTF16StringParser.class);
+        ApplicationName.setParserClass(UTF16StringParser.class);
+        ApplicationVersionString.setParserClass(UTF16StringParser.class);
         ApplicationProductID.setParserClass(UIDParser.class);
-        ApplicationPlatform1.setParserClass(UTF16StringParser.class);
+        ApplicationPlatform.setParserClass(UTF16StringParser.class);
         // content storage
-        EssenceData.setParserClass(UIDBatchParser.class);
+        EssenceDataObjects.setParserClass(UIDBatchParser.class);
         // packages
         PackageID.setParserClass(UMIDParser.class);
-        PackageName.setParserClass(ISO88591StringParser.class);
-        PackageName1.setParserClass(UTF16StringParser.class);
-        CreationDateTime.setParserClass(TimestampParser.class);
-        PackageLastModificationDateTime.setParserClass(TimestampParser.class);
-        Tracks.setParserClass(UIDBatchParser.class);
+        PackageName_ISO7.setParserClass(ISO88591StringParser.class);
+        PackageName.setParserClass(UTF16StringParser.class);
+        CreationTime.setParserClass(TimestampParser.class);
+        PackageLastModified.setParserClass(TimestampParser.class);
+        PackageTracks.setParserClass(UIDBatchParser.class);
         // source package
         EssenceDescription.setParserClass(UIDParser.class);
         // generic descriptor
-        EssenceLocators.setParserClass(UIDBatchParser.class);
+        Locators.setParserClass(UIDBatchParser.class);
         // network locator
-        URL1.setParserClass(UTF16StringParser.class);
+        URL.setParserClass(UTF16StringParser.class);
         // essence container data
         LinkedPackageID.setParserClass(UMIDParser.class);
         EssenceStreamID = Registry.add(new NumericUL(EssenceStreamID.getName(), EssenceStreamID.getKey(), false, 4));
         IndexStreamID = Registry.add(new NumericUL(IndexStreamID.getName(), IndexStreamID.getKey(), false, 4));
         // tracks
-        TrackName.setParserClass(ISO88591StringParser.class);
-        TrackName1.setParserClass(UTF16StringParser.class);
-        TrackNumber = Registry.add(new NumericUL(TrackNumber.getName(), TrackNumber.getKey(), false, 4));
+        TrackName_ISO7.setParserClass(ISO88591StringParser.class);
+        TrackName.setParserClass(UTF16StringParser.class);
+        EssenceTrackNumber = Registry.add(new NumericUL(EssenceTrackNumber.getName(), EssenceTrackNumber.getKey(), false, 4));
         TrackID = Registry.add(new NumericUL(TrackID.getName(), TrackID.getKey(), false, 4));
-        TimelineEditRate.setParserClass(RationalParser.class);
+        EditRate.setParserClass(RationalParser.class);
         Origin = Registry.add(new NumericUL(Origin.getName(), Origin.getKey(), true, 8));
-        Segment.setParserClass(UIDParser.class);
+        TrackSegment.setParserClass(UIDParser.class);
         // sequence
         ComponentDataDefinition.setParserClass(ULParser.class);
         ComponentLength = Registry.add(new NumericUL(ComponentLength.getName(), ComponentLength.getKey(), true, 8));
-        ComponentsinSequence.setParserClass(UIDBatchParser.class);
+        ComponentObjects.setParserClass(UIDBatchParser.class);
         // timecode component
-        RoundedTimecodeTimebase = Registry.add(new NumericUL(RoundedTimecodeTimebase.getName(), RoundedTimecodeTimebase.getKey(), false, 2));
+        FramesPerSecond = Registry.add(new NumericUL(FramesPerSecond.getName(), FramesPerSecond.getKey(), false, 2));
         StartTimecode = Registry.add(new NumericUL(StartTimecode.getName(), StartTimecode.getKey(), true, 8));
         DropFrame = Registry.add(new NumericUL(DropFrame.getName(), DropFrame.getKey(), false, 1));
         // source clip
-        StartTimeRelativetoReference1 = Registry.add(new NumericUL(StartTimeRelativetoReference1.getName(), StartTimeRelativetoReference1.getKey(), true, 8));
+        StartPosition = Registry.add(new NumericUL(StartPosition.getName(), StartPosition.getKey(), true, 8));
         SourcePackageID.setParserClass(UMIDParser.class);
         SourceTrackID = Registry.add(new NumericUL(SourceTrackID.getName(), SourceTrackID.getKey(), false, 4));
         // multiple descriptor
@@ -75,15 +75,16 @@ public class Metadata extends MetadataGen {
         SampleRate.setParserClass(RationalParser.class);
         EssenceLength = Registry.add(new NumericUL(EssenceLength.getName(), EssenceLength.getKey(), true, 8));
         EssenceContainerFormat.setParserClass(ULParser.class);
-        BitsPerAudioSample = Registry.add(new NumericUL(BitsPerAudioSample.getName(), BitsPerAudioSample.getKey(), false, 4));
+        QuantizationBits = Registry.add(new NumericUL(QuantizationBits.getName(), QuantizationBits.getKey(), false, 4));
         ChannelCount = Registry.add(new NumericUL(ChannelCount.getName(), ChannelCount.getKey(), false, 4));
-        AudioSampleRate1.setParserClass(RationalParser.class);
+        AudioSampleRate.setParserClass(RationalParser.class);
         BlockAlign = Registry.add(new NumericUL(BlockAlign.getName(), BlockAlign.getKey(), false, 2));
         AverageBytesPerSecond = Registry.add(new NumericUL(AverageBytesPerSecond.getName(), AverageBytesPerSecond.getKey(), false, 4));
         LinkedTrackID = Registry.add(new NumericUL(LinkedTrackID.getName(), LinkedTrackID.getKey(), false, 4));
         // Agility video
-        PresentationAspectRatio.setParserClass(RationalParser.class);
-        FrameLayout = Registry.add(new NumericUL(FrameLayout.getName(), FrameLayout.getKey(), false, 1)); // TODO: enum
+        ImageAspectRatio.setParserClass(RationalParser.class);
+        FrameLayout.setParserClass(FrameLayoutParser.class);
+        PictureCompression.setParserClass(ULParser.class);
         HorizontalSubsampling = Registry.add(new NumericUL(HorizontalSubsampling.getName(), HorizontalSubsampling.getKey(), false, 4));
         ColorSiting = Registry.add(new NumericUL(ColorSiting.getName(), ColorSiting.getKey(), false, 1)); // TODO: enum
         SampledHeight = Registry.add(new NumericUL(SampledHeight.getName(), SampledHeight.getKey(), false, 4));
@@ -96,9 +97,9 @@ public class Metadata extends MetadataGen {
         DisplayYOffset = Registry.add(new NumericUL(DisplayYOffset.getName(), DisplayYOffset.getKey(), true, 4));
         StoredHeight = Registry.add(new NumericUL(StoredHeight.getName(), StoredHeight.getKey(), false, 4));
         StoredWidth = Registry.add(new NumericUL(StoredWidth.getName(), StoredWidth.getKey(), false, 4));
-        BlackReferenceLevel = Registry.add(new NumericUL(BlackReferenceLevel.getName(), BlackReferenceLevel.getKey(), false, 4));
-        WhiteReferenceLevel = Registry.add(new NumericUL(WhiteReferenceLevel.getName(), WhiteReferenceLevel.getKey(), false, 4));
-        CaptureGammaEquation2.setParserClass(ULParser.class);
+        BlackRefLevel = Registry.add(new NumericUL(BlackRefLevel.getName(), BlackRefLevel.getKey(), false, 4));
+        WhiteRefLevel = Registry.add(new NumericUL(WhiteRefLevel.getName(), WhiteRefLevel.getKey(), false, 4));
+        TransferCharacteristic.setParserClass(ULParser.class);
         FieldDominance = Registry.add(new NumericUL(FieldDominance.getName(), FieldDominance.getKey(), false, 1));
         // ... skipped some here ...
         BitRate = Registry.add(new NumericUL(BitRate.getName(), BitRate.getKey(), false, 4));

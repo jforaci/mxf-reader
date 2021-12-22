@@ -112,10 +112,10 @@ public class MxfReaderUtility {
                     throw new RuntimeException("found more than one MP");
                 }
                 foundMaterialPackage = true;
-                for (Iterator<GroupNode> ti = group.refs(Metadata.Tracks).iterator(); ti.hasNext();) {
+                for (Iterator<GroupNode> ti = group.refs(Metadata.PackageTracks).iterator(); ti.hasNext();) {
                     GroupNode track = ti.next();
-                    GroupNode seq = track.ref(Metadata.Segment);
-                    for (Iterator<GroupNode> ci = seq.refs(Metadata.ComponentsinSequence).iterator(); ci.hasNext();) {
+                    GroupNode seq = track.ref(Metadata.TrackSegment);
+                    for (Iterator<GroupNode> ci = seq.refs(Metadata.ComponentObjects).iterator(); ci.hasNext();) {
                         GroupNode clip = ci.next();
                         if (Groups.TimecodeComponent.equals(clip.ul())) {
                             if (foundTimelineClip) {
@@ -127,7 +127,7 @@ public class MxfReaderUtility {
                             mpDropFrame = (((Number)clip.value(Metadata.DropFrame)).intValue() == 1);
                             mpDuration = editUnitDuration.intValue();
                             mpStart = editUnitStart;
-                            roundedTimecodeBase = ((Number)clip.value(Metadata.RoundedTimecodeTimebase)).intValue();
+                            roundedTimecodeBase = ((Number)clip.value(Metadata.FramesPerSecond)).intValue();
                         }
                     }
                 }

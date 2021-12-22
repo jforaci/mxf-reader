@@ -83,19 +83,19 @@ public class TrackInfoScanner {
             GroupNode group = i.next();
             if (Groups.SourcePackage.equals(group.ul())) {
                 GroupNode descriptor = group.ref(Metadata.EssenceDescription);
-                if (descriptor == null || descriptor.find(Metadata.EssenceLocators) != null) {
+                if (descriptor == null || descriptor.find(Metadata.Locators) != null) {
                     continue;
                 }
                 UMID packageId = (UMID) group.value(Metadata.PackageID);
                 if (packageId.equals(filePackageId)) {
-                    LeafNode tracksNode = (LeafNode) group.find(Metadata.Tracks);
+                    LeafNode tracksNode = (LeafNode) group.find(Metadata.PackageTracks);
                     for (Iterator<GroupNode> t = tracksNode.refs().iterator(); t.hasNext();) {
                         GroupNode track = t.next();
                         // SMPTE 377 says to treat non-zero track numbers in Lower-level Source
                         // Packages (and Material Packages) as "dark" metadata; however we're
                         // currently looking at Source Packages that are referenced as a File
                         // Package from the Essence Container Data set, so we're ok
-                        long trackNumber = ((Number)track.value(Metadata.TrackNumber)).longValue();
+                        long trackNumber = ((Number)track.value(Metadata.EssenceTrackNumber)).longValue();
                         long trackId = ((Number)track.value(Metadata.TrackID)).longValue();
                         if (trackNumber == 0) {
                             continue;

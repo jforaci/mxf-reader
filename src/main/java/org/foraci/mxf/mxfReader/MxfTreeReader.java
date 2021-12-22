@@ -141,7 +141,7 @@ public class MxfTreeReader extends MxfReader
             return;
         }
         // check if we have a strong reference referring to this instance UID
-        if (key.getUL().equals(Metadata.GUID)) {
+        if (key.getUL().equals(Metadata.InstanceID)) {
             // record this UUID's group (parent) for lookup by client
             if (!(value instanceof UID)) {
                 warn("value not a UID for key " + key + " at " + in.getLastKeyOffset());
