@@ -100,6 +100,9 @@ public class Metadata extends MetadataGen {
         BlackRefLevel = Registry.add(new NumericUL(BlackRefLevel.getName(), BlackRefLevel.getKey(), false, 4));
         WhiteRefLevel = Registry.add(new NumericUL(WhiteRefLevel.getName(), WhiteRefLevel.getKey(), false, 4));
         TransferCharacteristic.setParserClass(ULParser.class);
+        CodingEquations.setParserClass(ULParser.class);
+        ColorPrimaries.setParserClass(ULParser.class);
+        ContainerFormat.setParserClass(ULParser.class);
         FieldDominance = Registry.add(new NumericUL(FieldDominance.getName(), FieldDominance.getKey(), false, 1));
         // ... skipped some here ...
         BitRate = Registry.add(new NumericUL(BitRate.getName(), BitRate.getKey(), false, 4));
